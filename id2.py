@@ -8,9 +8,9 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 
 previous = 1
 current = 2
-sum = 0
+sum = 2
 while current < 4000000:
-    if current%2 == 0:
+    if current%2:
         sum += current
     tmp = current
     current += previous
