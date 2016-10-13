@@ -4,13 +4,21 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 Find the largest palindrome made from the product of two 3-digit numbers.
 
 """
-largestProduct = 0
-for x in range(100,999):
-    for y in range(100, 999):
-        product = x * y
+def palindromeCheck(digit):
+    string = str(digit)
+    for i in range(len(string)//2):
+        if string[i] != string[len(string)-i-1]:
+            return False
+    return True
 
-        if str(product) == str(product)[::-1]:
-            if product > largestProduct:
+def m1():
+    largestProduct = 0
+    for x in range(100,999):
+        for y in range(100, 999):
+            product = x * y
+            if palindromeCheck(product) and product>largestProduct:
                 largestProduct = product
+    return(largestProduct)
 
-print(largestProduct)
+print(m1())
+
