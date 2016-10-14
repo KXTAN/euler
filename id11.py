@@ -41,9 +41,40 @@ max_product_up_down = 0
 for x in range(len(num_grid)):
     product = 1
     for y in range(4):
-        product *= num_grid[x + y ][x]
+        if x <= 16:
+            product *= num_grid[x+y][x]
 
         if product > max_product_up_down:
             max_product_up_down = product
 
-print(max_product_up_down)
+max_product_left_right = 0
+for x in range(len(num_grid)):
+    product = 1
+    for y in range(4):
+        if x <= 16:
+            product *= num_grid[x][x+y]
+
+        if product > max_product_left_right:
+            max_product_left_right = product
+
+max_product_diagonal_up_right = 0
+for x in range(len(num_grid)):
+    for y in range(len(num_grid)):
+        if x < 17 and y > 2:
+            product = num_grid[x][y] * num_grid[x+1][y-1] * num_grid[x+2][y-2] * num_grid[x+3][y-3]
+
+            if product > max_product_diagonal_up_right:
+                max_product_diagonal_up_right = product
+
+max_product_diagonal_down_right = 0
+for x in range(len(num_grid)):
+    for y in range(len(num_grid)):
+        if x < 17 and y < 17:
+            product = num_grid[x][y] * num_grid[x+1][y+1] * num_grid[x+2][y+2] * num_grid[x+3][y+3]
+
+            if product > max_product_diagonal_down_right:
+                max_product_diagonal_down_right = product
+
+
+print(max(max_product_up_down, max_product_left_right, max_product_diagonal_down_right, max_product_diagonal_up_right))
+
