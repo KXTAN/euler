@@ -40,7 +40,8 @@ def m1():
 
 def m2():
     collatzTerm_list = {}
-    num_of_terms = 0
+    max_num_of_terms = 0
+    collatz = 0
     for x in range(1, 1000000):
         count = 0
         currentlyCounting = x
@@ -55,11 +56,11 @@ def m2():
             else:
                 count += collatzTerm_list[x]
                 break
-        if collatzTerm_list.get(currentlyCounting) is None:
-            collatzTerm_list[currentlyCounting] = count
-        if count > num_of_terms:
-            num_of_terms = count
-    return num_of_terms - 1
+        collatzTerm_list[currentlyCounting] = count
+        if count > max_num_of_terms:
+            max_num_of_terms = count
+            collatz = x
+    return collatz
 
 print(m2())
 
