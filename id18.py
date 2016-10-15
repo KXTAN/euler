@@ -34,7 +34,6 @@ def findMax(lst):
     while True:
         print(maxSum, lst[index])
         maxSum += lst[index]
-
         if index+i >= len(lst):
             return maxSum
         elif lst[index+i] > lst[index+i+1]:
@@ -70,14 +69,15 @@ def findMax2(lst):
         else:
             if flag == True:
                 level += 1
+                flag = False
         i += 1
-    return lst
+    return max(lst[-level:])
 
 with open('id18numbers') as file:
     pyramid=file.read().split()
 for i in range(len(pyramid)):
     pyramid[i] = int(pyramid[i])
-print(findMax2([3,7,4,2,4,6,8,5,9,3,1,2,3,4,5]))
+print(findMax2(pyramid))
 
 
 
