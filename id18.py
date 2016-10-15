@@ -27,15 +27,57 @@ Find the maximum total from top to bottom of the triangle below:
 """
 
 def findMax(lst):
+    #greedy approach does not work
     maxSum = 0
-    for level in range(?):
-        #afk
+    index = 0
+    i = 1
+    while True:
+        print(maxSum, lst[index])
+        maxSum += lst[index]
+
+        if index+i >= len(lst):
+            return maxSum
+        elif lst[index+i] > lst[index+i+1]:
+            index += i
+        else:
+            index += i+1
+        i += 1
+
+def findMax2(lst):
+    #boundary conditions
+    leftSlopeSum, rightSlopeSum = lst[0], lst[0]
+    leftSlopeIndex = 0
+    rightSlopeIndex = 0
+    indicesOfSlopes = [0]
+    counter = 1
+    while rightSlopeIndex+counter+1 < len(lst):
+        leftSlopeIndex += counter
+        rightSlopeIndex += counter+1
+        indicesOfSlopes.append(leftSlopeIndex)
+        indicesOfSlopes.append(rightSlopeIndex)
+        leftSlopeSum += lst[leftSlopeIndex]
+        rightSlopeSum += lst[rightSlopeIndex]
+        lst[rightSlopeIndex],lst[leftSlopeIndex] = rightSlopeSum, leftSlopeSum
+        counter+=1
+    #middle conditions
+    i = 4
+    level = 2
+    flag = False
+    while i < len(lst):
+        if i not in indicesOfSlopes:
+            lst[i] += max(lst[i-level], lst[i-level-1])
+            flag = True
+        else:
+            if flag == True:
+                level += 1
+        i += 1
+    return lst
 
 with open('id18numbers') as file:
     pyramid=file.read().split()
 for i in range(len(pyramid)):
     pyramid[i] = int(pyramid[i])
-print(findMax(pyramid))
+print(findMax2([3,7,4,2,4,6,8,5,9,3,1,2,3,4,5]))
 
 
 
