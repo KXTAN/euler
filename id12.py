@@ -26,7 +26,6 @@ What is the value of the first triangle number to have over five hundred divisor
 def generate_triangle_number(n):
     return int(n*(n+1)/2)
 
-
 def num_factor(n):
     count = 0
     square_root = int(math.sqrt(n)) + 1
